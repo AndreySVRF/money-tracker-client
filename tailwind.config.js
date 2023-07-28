@@ -2,7 +2,21 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    container: {
+      padding: '2rem',
+      center: true
+    },
+    extend: {
+      fontFamily: {
+        base: [
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'Roboto',
+          'sans-serif'
+        ]
+      }
+    }
   },
-  plugins: []
+  plugins: ['@tailwindcss/forms', 'prettier-plugin-foo']
 };
