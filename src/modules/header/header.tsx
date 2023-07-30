@@ -1,15 +1,22 @@
 import { FC } from 'react';
-import { Logo, Navigation, ThemeSwitcher } from '../../components';
+import {
+  INavigationItems,
+  Logo,
+  Navigation,
+  ThemeSwitcher
+} from '../../components';
 
 interface IHeaderProps {
-  isNavigationShow?: boolean;
+  navigationItems?: INavigationItems[];
 }
 
-const Header: FC<IHeaderProps> = ({ isNavigationShow }) => {
+const Header: FC<IHeaderProps> = ({ navigationItems }) => {
   return (
     <header className="flex items-center justify-between p-3">
       <Logo />
-      {isNavigationShow && <Navigation />}
+      {!!navigationItems?.length && (
+        <Navigation navigationItems={navigationItems} />
+      )}
       <ThemeSwitcher />
     </header>
   );

@@ -1,21 +1,29 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { CATEGORIES_ROUTE, TRANSACTIONS_ROUTE } from '../../router';
+import { INavigationItems } from './types';
 
-const Navigation: FC = () => {
+interface INavigationProps {
+  navigationItems: INavigationItems[];
+}
+
+const Navigation: FC<INavigationProps> = ({ navigationItems }) => {
+  const navigationItemsRender = navigationItems.map(({ title, path }) => (
+    <li>
+      <NavLink
+        className={({ isActive }) =>
+          isActive && path !== '/' ? 'text-green-600 dark:text-green-500' : ''
+        }
+        to={path}
+        key={path}
+      >
+        {title}
+      </NavLink>
+    </li>
+  ));
+
   return (
     <nav className="flex">
-      <ul className="flex gap-10">
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to={CATEGORIES_ROUTE}>Categories</NavLink>
-        </li>
-        <li>
-          <NavLink to={TRANSACTIONS_ROUTE}>Transactions</NavLink>
-        </li>
-      </ul>
+      <ul className="flex gap-10">{navigationItemsRender}</ul>
     </nav>
   );
 };
