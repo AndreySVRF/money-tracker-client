@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { Public } from '../../layouts';
 
 const Auth: FC = () => {
-  return <Public />;
+  return <div>Auth</div>;
 };
 
 export { Auth };
