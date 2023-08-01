@@ -22,7 +22,7 @@ const Private: FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 pb-20 font-base duration-100 dark:bg-slate-900 dark:text-gray-100">
-      <Header navigationItems={navigationItems} />
+      <Header isAuth={true} navigationItems={navigationItems} />
       <main>
         <Outlet />
       </main>
