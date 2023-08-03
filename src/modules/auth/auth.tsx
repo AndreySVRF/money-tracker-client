@@ -18,7 +18,6 @@ const Auth: FC = () => {
   };
 
   useEffect(() => {
-    // TODO: Extract to root utils
     if (pathname.slice(1) === SIGNUP_ROUTE) {
       setLogin(false);
     }
