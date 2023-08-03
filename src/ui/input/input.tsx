@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FieldValues } from 'react-hook-form';
-import { WarningIcon } from '../../assets';
 import * as classNames from 'classnames';
+import { ErrorMessage } from '../error-message';
 
 interface IInputProps extends FieldValues {
   textError?: string | null;
@@ -15,12 +15,7 @@ const Input: FC<IInputProps> = ({ textError, ...props }) => {
         {...props}
       />
 
-      {!!textError && (
-        <span className="ml-1 flex items-center gap-1 text-red-700">
-          <WarningIcon className="h-5 w-5" />
-          {textError}
-        </span>
-      )}
+      {!!textError && <ErrorMessage textError={textError} />}
     </div>
   );
 };
