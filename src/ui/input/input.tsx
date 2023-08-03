@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FieldValues } from 'react-hook-form';
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { ErrorMessage } from '../error-message';
 
 interface IInputProps extends FieldValues {

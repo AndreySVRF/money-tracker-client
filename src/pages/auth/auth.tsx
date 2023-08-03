@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { Auth as AuthModule } from '../../modules';
 
 const Auth: FC = () => {
-  return <div>Auth</div>;
+  return <AuthModule />;
 };
 
 export { Auth };
