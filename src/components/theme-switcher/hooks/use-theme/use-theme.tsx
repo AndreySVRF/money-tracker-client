@@ -1,15 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IThemeOptions, IThemeOptionsIcons, ThemeMode } from './types';
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  setToLocalStorage
+} from '../../../../utils';
+
+const THEME_KEY = 'theme';
 
 const useTheme = (icons?: IThemeOptionsIcons) => {
-  const [theme, setTheme] = useState<ThemeMode>(
-    localStorage.getItem('theme')
-      ? (String(localStorage.getItem('theme')) as ThemeMode)
-      : ThemeMode.System
-  );
-
   const rootNode = document.documentElement;
   const darkQuery = window.matchMedia('(prefers-color-scheme: dark');
+
+  const isSystemDarkMode =
+    getFromLocalStorage(THEME_KEY) === ThemeMode.Dark ||
+    (!(THEME_KEY in localStorage) && darkQuery.matches);
+
+  const [theme, setTheme] = useState<ThemeMode>(
+    getFromLocalStorage(THEME_KEY)
+      ? (getFromLocalStorage(THEME_KEY) as ThemeMode)
+      : isSystemDarkMode
+      ? ThemeMode.Dark
+      : ThemeMode.Light
+  );
 
   const themeOptions: IThemeOptions[] = [
     {
@@ -27,15 +40,12 @@ const useTheme = (icons?: IThemeOptionsIcons) => {
   ];
 
   const onWindowMath = useCallback(() => {
-    if (
-      localStorage.theme === ThemeMode.Dark ||
-      (!('theme' in localStorage) && darkQuery.matches)
-    ) {
+    if (isSystemDarkMode) {
       rootNode.classList.add(ThemeMode.Dark);
     } else {
       rootNode.classList.remove(ThemeMode.Dark);
     }
-  }, [darkQuery.matches, rootNode.classList]);
+  }, [isSystemDarkMode, rootNode.classList]);
 
   onWindowMath();
 
@@ -43,20 +53,24 @@ const useTheme = (icons?: IThemeOptionsIcons) => {
     switch (String(theme)) {
       case ThemeMode.Dark:
         rootNode.classList.add(ThemeMode.Dark);
-        localStorage.setItem('theme', ThemeMode.Dark);
+        setToLocalStorage(THEME_KEY, ThemeMode.Dark);
         break;
       case ThemeMode.Light:
         rootNode.classList.remove(ThemeMode.Dark);
-        localStorage.setItem('theme', ThemeMode.Light);
+        setToLocalStorage(THEME_KEY, ThemeMode.Light);
         break;
       default:
-        localStorage.removeItem('theme');
+        removeFromLocalStorage(THEME_KEY);
         onWindowMath();
         break;
     }
   }, [onWindowMath, rootNode.classList, theme]);
 
-  return { themeOptions, setTheme };
+  useEffect(() => {
+    setTheme(theme);
+  }, [theme]);
+
+  return { theme, setTheme, themeOptions };
 };
 
 export { useTheme };
