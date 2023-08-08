@@ -7,7 +7,7 @@ import { AuthService } from './services';
 import { toast } from 'react-toastify';
 import { errorHandler, setToLocalStorage, TOKEN_KEY } from '../../utils';
 import { useDispatch } from 'react-redux';
-import { login } from './slices/user.slice.ts';
+import { login } from './slices';
 
 const Auth: FC = () => {
   const [isLogin, setLogin] = useState<boolean>(true);

@@ -7,8 +7,7 @@ import { useAuth } from './modules/auth/hooks';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { errorHandler, getFromLocalStorage, TOKEN_KEY } from './utils';
-import { AuthService } from './modules/auth/services';
-import { login, logout } from './modules/auth/slices/user.slice.ts';
+import { AuthService, login, logout } from './modules';
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);
