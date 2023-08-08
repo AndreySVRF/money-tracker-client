@@ -2,11 +2,18 @@ import { FC, useEffect, useState } from 'react';
 import { LoginForm, RegisterForm } from './components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SIGNUP_ROUTE } from '../../router';
+import { ILoginForm, IRegisterForm } from './types';
+import { AuthService } from './services';
+import { toast } from 'react-toastify';
+import { errorHandler, setToLocalStorage, TOKEN_KEY } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { login } from './slices/user.slice.ts';
 
 const Auth: FC = () => {
   const [isLogin, setLogin] = useState<boolean>(true);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const showRegisterForm = () => {
     setLogin(false);
@@ -23,12 +30,43 @@ const Auth: FC = () => {
     }
   }, [pathname]);
 
+  const registrationHandler = async (userData: IRegisterForm) => {
+    try {
+      const data = await AuthService.registrations(userData);
+
+      if (data) {
+        toast.success('Account has been created.');
+        setLogin(true);
+      }
+    } catch (e) {
+      errorHandler(e);
+    }
+  };
+
+  const loginHandler = async (userData: ILoginForm) => {
+    try {
+      const data = await AuthService.login(userData);
+
+      if (data) {
+        setToLocalStorage(TOKEN_KEY, data.token);
+        dispatch(login(data));
+        toast.success('Login successful.');
+      }
+    } catch (e) {
+      errorHandler(e);
+    }
+  };
+
   return (
     <div className="mt-20 flex flex-col items-center justify-center gap-6">
       <div className="text-2xl font-bold">
         {isLogin ? 'Log In' : 'Registration'}
       </div>
-      {isLogin ? <LoginForm /> : <RegisterForm />}
+      {isLogin ? (
+        <LoginForm onSubmit={loginHandler} />
+      ) : (
+        <RegisterForm onSubmit={registrationHandler} />
+      )}
       {isLogin ? (
         <div>
           Don't have an account yet?{' '}

@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Input } from '../../../../ui';
-import {
-  EMAIL_PATTERN,
-  PASSWORD_MIN_LENGTH,
-  REQUIRED_FIELD_MESSAGE
-} from '../../../../utils';
-import { ILoginForm } from '../../types';
+import { EMAIL_PATTERN, REQUIRED_FIELD_MESSAGE } from '../../../../utils';
+import { ILoginForm, IRegisterForm } from '../../types';
 
-const LoginForm: FC = () => {
+interface ILoginFormProps {
+  onSubmit: (data: IRegisterForm) => void;
+}
+
+const LoginForm: FC<ILoginFormProps> = ({ onSubmit }) => {
   const defaultValues: ILoginForm = {
     email: '',
     password: ''
@@ -20,16 +20,10 @@ const LoginForm: FC = () => {
   };
 
   const passwordRules = {
-    required: REQUIRED_FIELD_MESSAGE,
-    minLength: {
-      value: PASSWORD_MIN_LENGTH,
-      message: `Password must contain at least ${PASSWORD_MIN_LENGTH} characters`
-    }
+    required: REQUIRED_FIELD_MESSAGE
   };
 
   const { control, handleSubmit } = useForm<ILoginForm>({ defaultValues });
-
-  const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data);
 
   return (
     <form

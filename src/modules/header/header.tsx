@@ -6,13 +6,26 @@ import {
   ThemeSwitcher
 } from '../../components';
 import { LogOutIcon } from '../../assets';
+import { useAuth } from '../auth/hooks';
+import { useDispatch } from 'react-redux';
+import { logout } from '../auth';
+import { removeFromLocalStorage, TOKEN_KEY } from '../../utils';
+import { toast } from 'react-toastify';
 
 interface IHeaderProps {
-  isAuth?: boolean;
   navigationItems?: INavigationItems[];
 }
 
-const Header: FC<IHeaderProps> = ({ isAuth, navigationItems }) => {
+const Header: FC<IHeaderProps> = ({ navigationItems }) => {
+  const isAuth = useAuth();
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    removeFromLocalStorage(TOKEN_KEY);
+    toast.success('You log out.');
+  };
+
   return (
     <header className="flex items-center justify-between p-3">
       <Logo />
@@ -25,7 +38,7 @@ const Header: FC<IHeaderProps> = ({ isAuth, navigationItems }) => {
         <ThemeSwitcher />
 
         {isAuth && (
-          <button className="btn">
+          <button className="btn" onClick={logoutHandler}>
             <LogOutIcon />
             <span>Log Out</span>
           </button>

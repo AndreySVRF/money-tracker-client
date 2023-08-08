@@ -8,7 +8,7 @@ interface INavigationProps {
 
 const Navigation: FC<INavigationProps> = ({ navigationItems }) => {
   const navigationItemsRender = navigationItems.map(({ title, path }) => (
-    <li>
+    <li key={path}>
       <NavLink
         className={({ isActive }) =>
           isActive && path !== '/' ? 'text-green-600 dark:text-green-500' : ''
