@@ -32,7 +32,7 @@ const App = () => {
       setLoading(false);
     };
 
-    checkAuth();
+    checkAuth().catch(console.error);
   }, [dispatch]);
 
   return (
