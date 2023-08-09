@@ -1,23 +1,27 @@
-import { ILoginForm, IRegisterForm, IUser, IUserResponse } from '../types';
+import { ILoginForm, IRegisterForm } from '../types';
 import { instance } from '../../../api';
+import { IUserRegisterResponseDto, IUserResponse } from '../dto';
 
 const AuthService = {
   async registrations(
     userData: IRegisterForm
-  ): Promise<IUserResponse | undefined> {
-    const { data } = await instance.post<IUserResponse>('user', userData);
+  ): Promise<IUserRegisterResponseDto | undefined> {
+    const { data } = await instance.post<IUserRegisterResponseDto>(
+      'user',
+      userData
+    );
 
     return data;
   },
 
-  async login(userData: ILoginForm): Promise<IUser | undefined> {
-    const { data } = await instance.post<IUser>('auth/login', userData);
+  async login(userData: ILoginForm): Promise<IUserResponse | undefined> {
+    const { data } = await instance.post<IUserResponse>('auth/login', userData);
 
     return data;
   },
 
-  async getProfile(): Promise<IUser | undefined> {
-    const { data } = await instance.get<IUser>('auth/profile');
+  async getProfile(): Promise<IUserResponse | undefined> {
+    const { data } = await instance.get<IUserResponse>('auth/profile');
 
     return data;
   }
