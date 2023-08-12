@@ -8,7 +8,7 @@
   }
 
   td {
-    @apply capitalize text-white/70;
+    @apply capitalize dark:text-white;
   }
 
   thead td {
