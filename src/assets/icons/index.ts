@@ -6,3 +6,7 @@ export { ReactComponent as LogOutIcon } from './log-out-icon.svg';
 export { ReactComponent as WarningIcon } from './warning-icon.svg';
 export { ReactComponent as SpinnerIcon } from './spinner-icon.svg';
 export { ReactComponent as PlusCircleIcon } from './plus-circle-icon.svg';
+export { ReactComponent as PencilIcon } from './pencil-icon.svg';
+export { ReactComponent as TrashIcon } from './trash-icon.svg';
+export { ReactComponent as CloseCircleIcon } from './close-circle-icon.svg';
+export { ReactComponent as CloseIcon } from './close-icon.svg';
