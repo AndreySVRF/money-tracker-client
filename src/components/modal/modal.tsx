@@ -1,6 +1,7 @@
 import React, { ReactNode, useCallback, useEffect, useRef } from 'react';
 import { CloseIcon } from '../../assets';
 import classNames from 'classnames';
+import { useEvent } from '../../utils';
 
 interface ModalProps {
   title?: string;
@@ -17,6 +18,14 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
     contentRef.current?.classList.toggle('-translate-y-10', isClosing);
   };
 
+  const handleEsc = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      close();
+    }
+  };
+
+  useEvent('keydown', handleEsc);
+
   const close = useCallback(() => {
     animate(true);
 
@@ -25,16 +34,6 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
 
   useEffect(() => {
     setTimeout(animate);
-
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        close();
-      }
-    };
-
-    document.addEventListener('keydown', handleEsc);
-
-    return () => document.removeEventListener('keydown', handleEsc);
   }, [close, handleClose]);
 
   return (
@@ -45,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
       onClick={close}
     >
       <div
-        className="relative h-80 w-[450px] -translate-y-10 rounded-md bg-white transition-transform duration-300 dark:bg-gray-800"
+        className="relative bottom-0 top-0  flex max-h-[calc(100vh-40px)] w-[450px] -translate-y-10 flex-col overflow-y-auto rounded-md bg-white transition-transform duration-300 dark:bg-gray-800"
         ref={contentRef}
         onClick={(event) => event.stopPropagation()}
       >
@@ -56,14 +55,14 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
         >
           {title && <div className="text-xl">{title}</div>}
           <button
-            className=" right-0  text-neutral-800 duration-300 hover:text-neutral-600 dark:text-neutral-300 dark:hover:text-neutral-100"
+            className="right-0 text-neutral-800 duration-300 hover:text-neutral-600 dark:text-neutral-300 dark:hover:text-neutral-100"
             onClick={close}
           >
             <CloseIcon className="h-7 w-7" />
           </button>
         </div>
 
-        <div className="px-5 py-4">{children}</div>
+        <div className="flex-grow overflow-y-auto px-5 py-4">{children}</div>
       </div>
     </div>
   );
