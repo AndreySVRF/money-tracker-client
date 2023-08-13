@@ -18,7 +18,7 @@
 
 @layer components {
   .btn {
-    @apply flex cursor-pointer items-center justify-center gap-2 rounded-md border border-slate-600 px-4 py-3 text-sm text-slate-800 duration-100 hover:border-green-500 hover:text-green-500 focus:border-green-600 focus:text-green-600 dark:text-white;
+    @apply flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm duration-100;
   }
 
   .input {
@@ -37,6 +37,10 @@
 
   .btn-green {
     @apply border-green-500 bg-green-500 text-white hover:border-green-600 hover:bg-green-600 hover:text-white focus:border-green-700 focus:bg-green-700 focus:text-white;
+  }
+
+  .btn-outline {
+    @apply border-slate-600 text-slate-800 hover:border-green-500 hover:text-green-500 focus:border-green-600 focus:text-green-600 dark:text-white;
   }
 
   .input-error {
