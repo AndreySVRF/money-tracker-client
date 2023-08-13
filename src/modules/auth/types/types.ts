@@ -5,4 +5,10 @@ interface ILoginForm {
 
 interface IRegisterForm extends ILoginForm {}
 
-export type { ILoginForm, IRegisterForm };
+interface IUser {
+  id: string;
+  email: string;
+  token: string;
+}
+
+export type { ILoginForm, IRegisterForm, IUser };

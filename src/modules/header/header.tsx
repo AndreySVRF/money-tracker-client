@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../auth';
 import { removeFromLocalStorage, TOKEN_KEY } from '../../utils';
 import { toast } from 'react-toastify';
+import { Button, ButtonVariant } from '../../ui';
 
 interface IHeaderProps {
   navigationItems?: INavigationItems[];
@@ -38,10 +39,10 @@ const Header: FC<IHeaderProps> = ({ navigationItems }) => {
         <ThemeSwitcher />
 
         {isAuth && (
-          <button className="btn" onClick={logoutHandler}>
+          <Button variant={ButtonVariant.Secondary} onClick={logoutHandler}>
             <LogOutIcon />
             <span>Log Out</span>
-          </button>
+          </Button>
         )}
       </div>
     </header>

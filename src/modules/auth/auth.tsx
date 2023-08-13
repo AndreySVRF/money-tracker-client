@@ -30,7 +30,7 @@ const Auth: FC = () => {
     }
   }, [pathname]);
 
-  const registrationHandler = async (userData: IRegisterForm) => {
+  const handleRegistration = async (userData: IRegisterForm) => {
     try {
       const data = await AuthService.registrations(userData);
 
@@ -43,7 +43,7 @@ const Auth: FC = () => {
     }
   };
 
-  const loginHandler = async (userData: ILoginForm) => {
+  const handleLogin = async (userData: ILoginForm) => {
     try {
       const data = await AuthService.login(userData);
 
@@ -63,9 +63,9 @@ const Auth: FC = () => {
         {isLogin ? 'Log In' : 'Registration'}
       </div>
       {isLogin ? (
-        <LoginForm onSubmit={loginHandler} />
+        <LoginForm onSubmit={handleLogin} />
       ) : (
-        <RegisterForm onSubmit={registrationHandler} />
+        <RegisterForm onSubmit={handleRegistration} />
       )}
       {isLogin ? (
         <div>
