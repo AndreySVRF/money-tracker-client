@@ -9,7 +9,7 @@ const Table: FC<ITableProps> = ({ header, rows }) => {
   const renderHeader = () => {
     return (
       <tr className="bg-slate-300 dark:bg-slate-600">
-        {header.map((headerItem, index) => (
+        {header?.map((headerItem, index) => (
           <th className="border border-x-0 border-gray-400 p-3" key={index}>
             {headerItem}
           </th>
@@ -19,7 +19,7 @@ const Table: FC<ITableProps> = ({ header, rows }) => {
   };
 
   const renderBody = () => {
-    return rows.map((row, rowIndex) => (
+    return rows?.map((row, rowIndex) => (
       <tr className="bg-white dark:bg-slate-500" key={rowIndex}>
         {row.map((cell, cellIndex) => (
           <td className="border border-x-0 border-gray-400 p-3" key={cellIndex}>
