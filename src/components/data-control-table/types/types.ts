@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-interface IDataTableItems {
+interface IDataTableItem {
   id: number;
   title: string;
   other?: (string | number | null | ReactNode)[];
 }
 
-export type { IDataTableItems };
+export type { IDataTableItem };

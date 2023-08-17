@@ -1,10 +1,10 @@
 import { FC, ReactNode } from 'react';
 import { PencilIcon, TrashIcon } from '../../assets';
 import { Button, ButtonVariant, Table } from '../../ui';
-import { IDataTableItems } from './types/types.ts';
+import { IDataTableItem } from './types/types.ts';
 
 interface IDataControlTableProps {
-  data: IDataTableItems[];
+  data: IDataTableItem[];
   header?: string[];
   handleEdit?: (id: number) => void;
   handleRemove?: (id: number) => void;
