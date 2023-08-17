@@ -11,8 +11,10 @@ import { login } from './slices';
 
 const Auth: FC = () => {
   const [isLogin, setLogin] = useState<boolean>(true);
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const showRegisterForm = () => {
