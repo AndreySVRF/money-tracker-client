@@ -8,10 +8,10 @@ import {
 import { LogOutIcon } from '../../assets';
 import { useAuth } from '../auth/hooks';
 import { useDispatch } from 'react-redux';
-import { logout } from '../auth';
-import { removeFromLocalStorage, TOKEN_KEY } from '../../utils';
+import { AuthService } from '../auth';
 import { toast } from 'react-toastify';
 import { Button, ButtonVariant } from '../../ui';
+import { resetStore } from '../../store';
 
 interface IHeaderProps {
   navigationItems?: INavigationItems[];
@@ -22,8 +22,8 @@ const Header: FC<IHeaderProps> = ({ navigationItems }) => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(logout());
-    removeFromLocalStorage(TOKEN_KEY);
+    resetStore(dispatch);
+    AuthService.logout();
     toast.success('You log out.');
   };
 

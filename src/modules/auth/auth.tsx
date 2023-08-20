@@ -5,7 +5,7 @@ import { SIGNUP_ROUTE } from '../../router';
 import { ILoginForm, IRegisterForm } from './types';
 import { AuthService } from './services';
 import { toast } from 'react-toastify';
-import { errorHandler, setToLocalStorage, TOKEN_KEY } from '../../utils';
+import { errorHandler } from '../../utils';
 import { useDispatch } from 'react-redux';
 import { login } from './slices';
 
@@ -50,7 +50,6 @@ const Auth: FC = () => {
       const data = await AuthService.login(userData);
 
       if (data) {
-        setToLocalStorage(TOKEN_KEY, data.token);
         dispatch(login(data));
         toast.success('Login successful.');
       }
