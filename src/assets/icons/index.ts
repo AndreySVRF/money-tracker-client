@@ -10,3 +10,4 @@ export { ReactComponent as PencilIcon } from './pencil-icon.svg';
 export { ReactComponent as TrashIcon } from './trash-icon.svg';
 export { ReactComponent as CloseCircleIcon } from './close-circle-icon.svg';
 export { ReactComponent as CloseIcon } from './close-icon.svg';
+export { ReactComponent as EmptyListIcon } from './empty-list-icon.svg';
