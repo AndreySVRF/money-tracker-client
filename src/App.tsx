@@ -6,7 +6,7 @@ import { useAuth } from './modules/auth/hooks';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { errorHandler, getFromLocalStorage, TOKEN_KEY } from './utils';
-import { AuthService, login, logout } from './modules';
+import { AuthService, login } from './modules';
 import { PageLoader } from './components';
 import { privateRoutes, publicRoutes } from './router';
 
@@ -23,7 +23,7 @@ const App = () => {
       if (token) {
         try {
           const data = await AuthService.getProfile();
-          data ? dispatch(login(data)) : logout();
+          data ? dispatch(login(data)) : AuthService.logout();
         } catch (error) {
           errorHandler(error);
         }

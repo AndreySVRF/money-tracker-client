@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { Categories as CategoriesModule } from '../../modules';
 
 const Categories: FC = () => {
-  return <div>Categories</div>;
+  return <CategoriesModule />;
 };
 
 export { Categories };
