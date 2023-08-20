@@ -10,7 +10,6 @@ const Button: FC<IButtonProps> = ({
   variant = ButtonVariant.Primary,
   ...props
 }) => {
-  console.log('props.className', props.className);
   return (
     <button
       {...props}
