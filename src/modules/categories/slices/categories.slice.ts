@@ -10,7 +10,7 @@ const initialState: ICategoriesState = {
 };
 
 export const categoriesSlice = createSlice({
-  name: 'category',
+  name: 'categories',
   initialState,
   reducers: {
     setAll: (state, action: PayloadAction<ICategory[]>) => {
@@ -38,6 +38,9 @@ export const categoriesSlice = createSlice({
     resetCategoriesState: () => initialState
   }
 });
+
+export type { ICategoriesState };
+export { initialState };
 
 export const { setAll, add, update, remove, resetCategoriesState } =
   categoriesSlice.actions;

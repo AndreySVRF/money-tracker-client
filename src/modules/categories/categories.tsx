@@ -1,15 +1,18 @@
 import { FC, useEffect, useState } from 'react';
 import { PlusCircleIcon } from '../../assets';
-import { DataEmptyInfo, IDataTableItem, Modal } from '../../components';
-import { CategoryForm, DataControlTable } from './components';
+import {
+  DataControlTable,
+  DataEmptyInfo,
+  IDataTableItem,
+  Modal
+} from '../../components';
+import { CategoryForm } from './components';
 import { ICategoryForm } from './types';
 import { Button } from '../../ui';
-import { errorHandler } from '../../utils';
-import { CategoriesService } from './services';
 import { useDispatch, useSelector } from 'react-redux';
-import { add, remove, setAll, update } from './slices';
 import { RootState } from '../../store';
-import { categoryFormDataAdapter } from './helpers';
+import { CategoryFormDataAdapter } from './helpers';
+import { CategoriesActions } from './actions';
 
 const Categories: FC = () => {
   const [isOpenAddCategoryModal, setOpenAddCategoryModal] = useState(false);
@@ -20,6 +23,8 @@ const Categories: FC = () => {
   const categories = useSelector(
     (state: RootState) => state.categories.categories
   );
+
+  const categoriesActions = CategoriesActions(dispatch);
 
   const selectedCategory = categories?.find(
     ({ id }) => id === selectedCategoryId
@@ -46,69 +51,22 @@ const Categories: FC = () => {
     toggleEditCategoryModal();
   };
 
-  const loadCategories = async () => {
-    try {
-      const data = await CategoriesService.getAll();
-
-      console.log('data', data);
-
-      if (data) {
-        dispatch(setAll(data));
-      }
-    } catch (e) {
-      errorHandler(e);
-    }
-  };
-
   const handleAddCategory = async (userData: ICategoryForm) => {
-    try {
-      const data = await CategoriesService.add(userData);
-
-      if (data) {
-        dispatch(add(data));
-      }
-
-      loadCategories().catch(console.error);
-
-      toggleAddCategoryModal();
-    } catch (e) {
-      errorHandler(e);
-    }
+    await categoriesActions.addCategory(userData).then(toggleAddCategoryModal);
   };
 
   const handleUpdateCategory = async (id: number, userData: ICategoryForm) => {
-    try {
-      const data = await CategoriesService.update(id, userData);
-
-      if (data) {
-        dispatch(update(data));
-      }
-
-      loadCategories().catch(console.error);
-
-      toggleEditCategoryModal();
-    } catch (e) {
-      errorHandler(e);
-    }
+    await categoriesActions
+      .updateCategory(id, userData)
+      .then(toggleEditCategoryModal);
   };
 
   const handleRemoveCategory = async (id: number) => {
-    try {
-      const data = await CategoriesService.remove(id);
-
-      if (data) {
-        dispatch(remove(id));
-      }
-
-      loadCategories().catch(console.error);
-    } catch (e) {
-      errorHandler(e);
-    }
+    await categoriesActions.removeCategory(id);
   };
 
   useEffect(() => {
-    console.log('load');
-    loadCategories().catch(console.error);
+    categoriesActions.loadCategories().catch(console.error);
   }, []);
 
   return (
@@ -144,7 +102,7 @@ const Categories: FC = () => {
         <Modal title="Edit category" handleClose={toggleEditCategoryModal}>
           <CategoryForm
             initialValues={
-              selectedCategory && categoryFormDataAdapter(selectedCategory)
+              selectedCategory && CategoryFormDataAdapter(selectedCategory)
             }
             onSubmit={(userData) =>
               handleUpdateCategory(selectedCategoryId, userData)

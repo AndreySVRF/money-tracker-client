@@ -1,11 +1,11 @@
 import { ICategory, ICategoryForm } from '../types';
 
-const categoryFormDataAdapter = (data: ICategory): ICategoryForm => {
-  const formData: ICategoryForm = {
-    title: data.title
-  };
+const CategoryFormDataAdapter = (userData: ICategory): ICategoryForm => {
+  const { title } = userData;
 
-  return formData;
+  return {
+    title
+  };
 };
 
-export { categoryFormDataAdapter };
+export { CategoryFormDataAdapter };

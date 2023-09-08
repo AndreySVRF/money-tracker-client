@@ -22,8 +22,6 @@ const CategoryForm: FC<ICategoryFormProps> = ({ initialValues, onSubmit }) => {
     defaultValues: initialValues || defaultValues
   });
 
-  console.log('initialValues', initialValues);
-
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <Controller
