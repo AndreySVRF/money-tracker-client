@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { Transactions as TransactionsModule } from '../../modules';
 
 const Transactions: FC = () => {
-  return <div>Transactions</div>;
+  return <TransactionsModule />;
 };
 
 export { Transactions };

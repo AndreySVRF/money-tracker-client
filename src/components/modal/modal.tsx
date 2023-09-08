@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
       onClick={close}
     >
       <div
-        className="relative bottom-0 top-0  flex max-h-[calc(100vh-40px)] w-[450px] -translate-y-10 flex-col overflow-y-auto rounded-md bg-white transition-transform duration-300 dark:bg-gray-800"
+        className="relative bottom-0 top-0 flex max-h-[calc(100vh-40px)] w-[450px] -translate-y-10 flex-col rounded-md bg-white transition-transform duration-300 dark:bg-gray-800"
         ref={contentRef}
         onClick={(event) => event.stopPropagation()}
       >
@@ -62,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({ title, handleClose, children }) => {
           </button>
         </div>
 
-        <div className="flex-grow overflow-y-auto px-5 py-4">{children}</div>
+        <div className="flex-grow px-5 py-4">{children}</div>
       </div>
     </div>
   );
