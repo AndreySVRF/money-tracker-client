@@ -67,6 +67,7 @@ const Categories: FC = () => {
 
   useEffect(() => {
     categoriesActions.loadCategories().catch(console.error);
+    // eslint-disable-next-line
   }, []);
 
   return (
