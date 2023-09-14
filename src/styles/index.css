@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-sm;
+    @apply text-sm dark:text-white;
   }
 
   td {
@@ -22,7 +22,11 @@
   }
 
   .input {
-    @apply rounded-md border border-slate-400 bg-slate-100 p-2 outline-none focus:border-slate-500 dark:bg-slate-800;
+    @apply rounded-md border border-slate-400 bg-slate-100 p-2 placeholder-gray-500 outline-none hover:border-gray-600 focus:border-slate-500 dark:bg-slate-800 dark:placeholder-gray-400;
+  }
+
+  .input-radio {
+    @apply relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-200 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-7 before:w-7 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:bg-gray-500 before:opacity-0 before:transition-opacity before:content-[""] hover:before:opacity-10 dark:before:bg-gray-100;
   }
 
   .container {
@@ -31,16 +35,24 @@
 }
 
 @layer utilities {
-  .btn-red {
-    @apply border-red-500 bg-red-500 text-white hover:border-red-600 hover:bg-red-600 hover:text-white focus:border-red-700 focus:bg-red-700 focus:text-white dark:border-rose-900 dark:bg-rose-900 dark:hover:bg-rose-800;
-  }
-
   .btn-green {
     @apply border-green-500 bg-green-500 text-white hover:border-green-600 hover:bg-green-600 hover:text-white focus:border-green-700 focus:bg-green-700 focus:text-white;
   }
 
+  .btn-red {
+    @apply border-red-500 bg-red-500 text-white hover:border-red-600 hover:bg-red-600 hover:text-white focus:border-red-700 focus:bg-red-700 focus:text-white dark:border-rose-900 dark:bg-rose-900 dark:hover:bg-rose-800;
+  }
+
   .btn-outline {
     @apply border-slate-600 text-slate-800 hover:border-green-500 hover:text-green-500 focus:border-green-600 focus:text-green-600 dark:text-white;
+  }
+
+  .input-radio-green {
+    @apply text-green-500 checked:border-green-500 checked:before:bg-green-500;
+  }
+
+  .input-radio-red {
+    @apply border-red-500 text-red-500 before:bg-red-500;
   }
 
   .input-error {
