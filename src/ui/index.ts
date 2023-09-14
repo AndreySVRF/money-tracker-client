@@ -4,3 +4,4 @@ export * from './loader';
 export * from './table';
 export * from './button';
 export * from './select';
+export * from './radio';
