@@ -34,12 +34,15 @@ const Transactions: FC = () => {
     label: title
   }));
 
-  const transactionsTableHeader = ['Title', 'Amount', ''];
+  const transactionsTableHeader = ['Title', 'Date', 'Amount, ₽', ''];
   const transactionsTableData: IDataTableItem[] = transactions?.map(
-    ({ id, title, amount }) => ({
+    ({ id, title, date, amount }) => ({
       id,
       title,
-      other: [<div className="text-center">{amount}</div>]
+      other: [
+        [<div className="text-center">{date}</div>],
+        [<div className="text-center">{amount}</div>]
+      ]
     })
   );
 

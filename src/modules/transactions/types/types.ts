@@ -12,10 +12,10 @@ interface ITransactionForm {
 interface ITransaction {
   id: number;
   title: string;
+  type: ITransactionType;
+  date: string;
   amount: number;
-  category: {
-    id: number;
-  };
+  category: string;
 }
 
 export type { ITransactionType, ITransactionForm, ITransaction };

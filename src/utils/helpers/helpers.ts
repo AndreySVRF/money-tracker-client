@@ -1,5 +1,7 @@
 import { Error } from '../types';
 import { toast } from 'react-toastify';
+import { format } from 'date-fns';
+import { DATE_AND_TIME_FORMAT } from '../consts';
 
 const getFromLocalStorage = (key: string): string | null => {
   return localStorage.getItem(key) || null;
@@ -22,9 +24,14 @@ const errorHandler = (e: unknown): void => {
   console.error(textError);
 };
 
+const getDateAndTime = (date: string): string => {
+  return format(new Date(date), DATE_AND_TIME_FORMAT);
+};
+
 export {
   getFromLocalStorage,
   setToLocalStorage,
   removeFromLocalStorage,
-  errorHandler
+  errorHandler,
+  getDateAndTime
 };

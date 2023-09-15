@@ -1,4 +1,5 @@
 import { ITransactionType } from '../types';
+import { ICategory } from '../../categories';
 
 interface ITransactionsGetResponseDto {
   id: number;
@@ -7,9 +8,7 @@ interface ITransactionsGetResponseDto {
   type: ITransactionType;
   createdAt: string;
   updatedAt: string;
-  category: {
-    id: number;
-  };
+  category: ICategory;
 }
 
 export type { ITransactionsGetResponseDto };

@@ -2,8 +2,8 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { TransactionsService } from '../services';
 import { add, remove, setAll } from '../slices';
 import { errorHandler } from '../../../utils';
-import { ITransactionForm } from '../types';
-import { TransactionDataAddAdapter } from '../helpers';
+import { ITransaction, ITransactionForm } from '../types';
+import { TransactionDataAdapter, TransactionDataAddAdapter } from '../helpers';
 
 const TransactionsActions = (dispatch: Dispatch) => {
   const loadTransactions = async () => {
@@ -11,7 +11,9 @@ const TransactionsActions = (dispatch: Dispatch) => {
       const data = await TransactionsService.getAll();
 
       if (data) {
-        dispatch(setAll(data));
+        const formattedData: ITransaction[] = data.map(TransactionDataAdapter);
+
+        dispatch(setAll(formattedData));
       }
     } catch (e) {
       errorHandler(e);
@@ -25,7 +27,9 @@ const TransactionsActions = (dispatch: Dispatch) => {
       const data = await TransactionsService.add(transactionData);
 
       if (data) {
-        dispatch(add(data));
+        const formattedData: ITransaction = TransactionDataAdapter(data);
+
+        dispatch(add(formattedData));
       }
 
       loadTransactions().catch(console.error);
