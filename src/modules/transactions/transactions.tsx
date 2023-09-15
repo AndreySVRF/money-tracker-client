@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { PlusCircleIcon } from '../../assets';
 import {
+  Amount,
   DataControlTable,
   DataEmptyInfo,
   IDataTableItem,
@@ -36,12 +37,12 @@ const Transactions: FC = () => {
 
   const transactionsTableHeader = ['Title', 'Date', 'Amount, ₽', ''];
   const transactionsTableData: IDataTableItem[] = transactions?.map(
-    ({ id, title, date, amount }) => ({
+    ({ id, title, type, date, amount }) => ({
       id,
       title,
       other: [
         [<div className="text-center">{date}</div>],
-        [<div className="text-center">{amount}</div>]
+        [<Amount amount={amount} transactionType={type} />]
       ]
     })
   );

@@ -12,3 +12,5 @@ export { ReactComponent as CloseCircleIcon } from './close-circle-icon.svg';
 export { ReactComponent as CloseIcon } from './close-icon.svg';
 export { ReactComponent as EmptyListIcon } from './empty-list-icon.svg';
 export { ReactComponent as CircleIcon } from './circle-icon.svg';
+export { ReactComponent as ArrowDownRightIcon } from './arrow-down-right.svg';
+export { ReactComponent as ArrowUpRightIcon } from './arrow-up-right.svg';
